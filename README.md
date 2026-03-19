@@ -1,4 +1,7 @@
 # LeetCode
+
+写在前面，创建这个仓库单纯是为了刷题和练习git命令
+
 ## 一、 刷题路线
 1. 代码随想录： https://programmercarl.com/qita/12.list.html （题单）				
 2. 灵茶山艾府（B站有讲解）： https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/  （科学刷题题单）	
