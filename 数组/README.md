@@ -30,16 +30,22 @@
 ## 三、笔记
 
 1. 思路
+
 在升序数组 nums 中寻找目标值 target，对于特定下标 i，比较 nums[i] 和 target 的大小：
+
 如果 nums[i]=target，则下标 i 即为要寻找的下标；
 如果 nums[i]>target，则 target 只可能在下标 i 的左侧；
 如果 nums[i]<target，则 target 只可能在下标 i 的右侧。
 
 
 2. 步骤
+
 （1）定义查找的范围 [left,right]，初始是整个数组，逐渐移动
+
 （2）每次取查找范围的中点 mid
+
 （3）比较 nums[mid] 和 target 的大小：
+
 如果相等则 mid 即为要寻找的下标；
 如果不相等则根据 nums[mid] 和 target 的大小关系将查找范围缩小一半
 
@@ -53,7 +59,10 @@ target：目标值
 
 
 4. 注意
+
 （1）确保是升序数组left <= right，降序数组修改循环条件为right <= left
+
 （2）确定中值的时候，为了防止数组长度过大，相加易导致的溢出，一般使用：mid=(high-low)//2 + low,先获取中间长度。
+
 （3）len(nums) 等价于 num.length
 
