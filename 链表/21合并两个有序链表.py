@@ -1,6 +1,8 @@
 # https://leetcode.cn/problems/merge-two-sorted-lists/?envType=study-plan-v2&envId=top-100-liked
 # 尾插法
 
+from typing import Optional, ListNode
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):

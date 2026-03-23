@@ -1,5 +1,6 @@
 # https://leetcode.cn/problems/swap-nodes-in-pairs/description/?envType=study-plan-v2&envId=top-100-liked
 
+from typing import ListNode, Optional
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
