@@ -6,11 +6,11 @@ from polars import List
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         f = [0] * len(nums)
-        for i, x in enumerate(nums):
-            for j, y in enumerate(nums[:i]):
-                if x > y:
-                    f[i] = max(f[i], f[j])
-            f[i] += 1
+        for i, nums[i] in enumerate(nums): # 遍历下标及对应数字
+            for j, nums[j] in enumerate(nums[:i]): # 遍历i前面的数字，j从0到i-1
+                if nums[i] > nums[j]: # 如果当前数字大于前面的数字就接上去
+                    f[i] = max(f[i], f[j]) # 把最长的给f[i]
+            f[i] += 1 # 找到了最长队伍之后，站到最长队伍后面，长度+1
         return max(f)
     
 # 法2：贪心+二分，时间复杂度O(nlogn)，空间复杂度O(n)
