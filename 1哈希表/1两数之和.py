@@ -1,4 +1,5 @@
 # https://leetcode.cn/problems/two-sum/?envType=study-plan-v2&envId=top-100-liked
+
 from typing import List
 
 # 优化解法:用哈希表,时间复杂度是 O(n) :
@@ -9,7 +10,6 @@ class Solution:
             if target - x in idx:  # 在左边找 nums[i]，满足 nums[i]+x=target
                 return [idx[target - x], i]  # 返回两个数的下标
             idx[x] = i  # 保存 nums[i] 和 i
-
 
 
 '''
