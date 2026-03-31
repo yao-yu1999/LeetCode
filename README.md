@@ -1,6 +1,6 @@
 # LeetCode
 
-写在前面，创建这个仓库单纯是为了刷题和练习git命令
+写在前面，创建这个仓库单纯是为了刷题和练习git命令。速通建议直接看题解、总结思路并背题。
 
 ## 一、 刷题路线
 1. 代码随想录： https://programmercarl.com/qita/12.list.html （题单）				
@@ -14,11 +14,9 @@
 ## 二、 每日刷题
 (1) 详细记录表：https://docs.qq.com/sheet/DRWhpY1dYWUdVenFz?tab=BB08J2
 
-(2) 刷题记录单：
-| 日期 | 题目 | 重点 |
-| :-----: | :---: | :------: |
-| 2026-03-19 | [两数之和](https://leetcode.cn/problems/two-sum?envType=study-plan-v2&envId=top-100-liked) | 指针指针指针指针指针指针 |
-| 2026-03-19 | [两数之和](https://leetcode.cn/problems/two-sum?envType=study-plan-v2&envId=top-100-liked) | 指针指针指针指针指针指针 |
+(2) 刷题题单
+基于力扣hot100的顺序刷题：https://leetcode.cn/studyplan/top-100-liked/
+有时间可以继续刷面试100：https://leetcode.cn/studyplan/top-interview-150/
 
 
 ## 三、 其他
