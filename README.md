@@ -16,7 +16,14 @@
 
 (2) 刷题题单
 基于力扣hot100的顺序刷题：https://leetcode.cn/studyplan/top-100-liked/
+
 有时间可以继续刷面试100：https://leetcode.cn/studyplan/top-interview-150/
+
+（3）推荐小程序：支持按公司、部门、岗位组合查询题目
+codeTop 企业题单：https://codetop.cc/（网站，也有微信小程序）
+
+Github仓库地址： https://github.com/afatcoder/LeetcodeTop
+
 
 
 ## 三、 其他
