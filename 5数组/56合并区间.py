@@ -6,8 +6,8 @@ class Solution:
         result = []
 
         for p in intervals: # 遍历排序后的区间列表
-            if result and p[0] <= result[-1][1]:  # 如果当前区间 p 的左端点不大于 result 中最后一个区间的右端点，说明它们相交，可以合并
-                result[-1][1] = max(result[-1][1], p[1])  
+            if result and p[0] <= result[-1][1]:  # # 可以合并：相交或相连。如果当前区间 p 的左端点不大于 result 中最后一个区间的右端点，说明它们相交，可以合并
+                result[-1][1] = max(result[-1][1], p[1])   # 更新 result 中最后一个区间的右端点为它们的右端点的较大值
             else:  # 不相交，无法合并
-                result.append(p)  # 新的合并区间
+                result.append(p)  # 将当前区间 p 添加到 result 中
         return result
