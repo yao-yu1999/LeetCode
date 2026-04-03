@@ -5,6 +5,11 @@ from polars import List
 from polars import TreeNode
 
 # 逆序压栈才能保证正确的弹出顺序，第一次入栈时，flag=0，表示需要展开该节点的子树；第二次入栈时，flag=1，表示该节点已经展开过了，可以直接出栈输出了。
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
@@ -12,18 +17,17 @@ class Solution:
         stack = [(0, root)]          # 根节点第一次入栈，flag=0
         
         while stack:
-            flag, node = stack.pop()   # 取出栈顶元素
-            if node is None:           # 空节点直接跳过
+            flag, node = stack.pop()   # 取出栈顶元素，包括flag和节点
+            if node is None:           # 叶子节点既没有左孩子又没有右孩子，即左右孩子为空节点直接跳过
                 continue
             
             if flag == 0:              # 第一次遇到：需要展开该节点的子树
                 # 按"右->根->左"的"逆中序"顺序入栈
-                stack.append((0, node.right))   # 右子节点（第一次入栈）
-                stack.append((1, node))         # 当前节点标记为1后入栈（第二次）
-                stack.append((0, node.left))    # 左子节点（第一次入栈）
+                stack.append((0, node.right))   # 加入右子节点（第一次入栈）
+                stack.append((1, node))         # 将当前节点标记为1后，入栈（第二次见到）
+                stack.append((0, node.left))    # 加入左子节点（第一次入栈）
             else:                      # 第二次遇到(flag == 1):直接输出
-                res.append(node.val)
-        
+                res.append(node.val)   # 将节点的值放入res中  
         return res
     
 # 答疑：为什么为什么根节点要标记为 1
