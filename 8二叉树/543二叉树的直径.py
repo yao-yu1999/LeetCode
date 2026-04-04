@@ -24,8 +24,8 @@ class Solution:
             nonlocal max_len # 在内部函数中修改外部变量，必须声明 nonlocal
             max_len = max(max_len, l_len + r_len) # 当前节点的直径 = 左链长 + 右链长，更新全局最大直径
 
-            return max(l_len, r_len) # 返回给父节点只能选一条链
+            return max(l_len, r_len) # 递归最终返回给父节点只能选一条链
 
-        dfs(root) # 开始递归
+        dfs(root) # 开始递归，因为最终返回给父节点只能选一条链，所以递归函数的返回值是当前节点的最大链长，而不是当前节点的直径。所以要嵌套一个递归函数来计算链长，并在递归过程中更新全局最大直径。最后返回全局最大直径即可。
         
         return max_len # 返回全局最大直径
