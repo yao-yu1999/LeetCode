@@ -18,6 +18,7 @@ https://labuladong.online/zh/roadmap/  （刷题路线）
 https://labuladong.online/zh/problemset/core/  （题单）
 
 5. 力扣
+
 https://leetcode.cn/studyplan/top-100-liked/  （热题100） 
 
 https://leetcode.cn/studyplan/top-interview-150/ （面试150）
@@ -38,7 +39,8 @@ https://my.feishu.cn/wiki/PdtGwSkxpi4EOzkvTZccjW22n8J?sheet=9EEToi
 (1) 详细记录表：https://docs.qq.com/sheet/DRWhpY1dYWUdVenFz?tab=BB08J2
 
 (2) 刷题题单
-基于力扣hot100的顺序刷题：https://leetcode.cn/studyplan/top-100-liked/
+
+基于力扣hot-100的顺序刷题：https://leetcode.cn/studyplan/top-100-liked/
 
 如果官解没有看懂，非常建议看灵茶山艾府的题解，通俗易懂，代码写的很清爽。
 
@@ -46,7 +48,7 @@ https://my.feishu.cn/wiki/PdtGwSkxpi4EOzkvTZccjW22n8J?sheet=9EEToi
 
 （3）小程序：支持按公司、部门、岗位组合查询题目
 
-codeTop 企业题单：https://codetop.cc/（网站，也有微信小程序）
+CodeTop 企业题单：https://codetop.cc/（网站，也有微信小程序）
 
 Github仓库地址： https://github.com/afatcoder/LeetcodeTop
 
