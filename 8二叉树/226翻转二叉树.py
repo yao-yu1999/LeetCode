@@ -3,7 +3,7 @@
 from typing import Optional
 from polars import TreeNode
 
-# 方法一：递归法
+# 方法一：递归法，DFS
 # 根据二叉树镜像的定义，考虑递归遍历（dfs）二叉树，交换每个节点的左 / 右子节点，即可生成二叉树的镜像。
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
@@ -37,9 +37,9 @@ class Solution:
             node.left, node.right = node.right, node.left  # 交换当前节点的 左、右孩子
         return root
     
+# （2）辅助队列
 from collections import deque  # 队列必须用 deque
 
-# （2）辅助队列
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if root is None: return None

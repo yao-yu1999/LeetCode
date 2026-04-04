@@ -11,7 +11,7 @@ from polars import TreeNode
 #         self.left = left
 #         self.right = right
 
-# 方法一：后序遍历（自底向上），递归实现 【简单】
+# 方法一：后序遍历（DFS，自底向上），递归实现 【简单】
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if root is None:
@@ -20,22 +20,22 @@ class Solution:
         right = self.maxDepth(root.right)
         return max(left, right) + 1
      
-# 方法二：后序遍历（自顶向下），递归实现 【不建议】
+# 方法二：后序遍历（DFS，自顶向下），递归实现 【不建议】
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        ans = 0
+        result = 0
         def dfs(node: Optional[TreeNode], depth: int) -> None:
             if node is None:
                 return None # 如果节点是空，就不用继续，直接返回。叶子节点既没有左孩子又没有右孩子，即左右孩子为空节点直接返回none
             depth += 1
-            nonlocal ans
-            ans = max(ans, depth)
+            nonlocal result
+            result = max(result, depth)
             dfs(node.left, depth)
             dfs(node.right, depth)
         dfs(root, 0)
-        return ans
+        return result
     
-# 方法三：层序遍历，队列实现【简单】
+# 方法三：层序遍历，队列实现【BFS，参考第102题的解答，本题不需要记录每层节点值，只需要记录最大深度】
 from collections import deque
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
