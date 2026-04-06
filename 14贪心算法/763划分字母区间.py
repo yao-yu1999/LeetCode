@@ -1,4 +1,5 @@
 # https://leetcode.cn/problems/partition-labels/description/?envType=study-plan-v2&envId=top-100-liked
+from polars import List
 
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
