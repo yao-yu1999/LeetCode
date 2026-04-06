@@ -7,9 +7,13 @@ from polars import List
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         max_x = 0  # 目前能跳到的最远位置
-        n = len(nums)
+        n = len(nums) 
         
-        for i in range(n): 
+        for i in range(n):
             if i > max_x: return False  # 如果当前位置都到不了，返回 False
             max_x = max(max_x, i + nums[i])  # 更新能跳的最远位置
+
+            # 提前结束：还没遍历完整个数组，只要发现 “已经能跳到终点”，立刻返回 True！
+            if max_x >= n - 1:
+                return True
         return True # 能走完所有位置，说明能到终点
