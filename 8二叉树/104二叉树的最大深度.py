@@ -2,7 +2,7 @@
 
 from typing import Optional
 from polars import TreeNode
-
+from collections import deque
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -36,7 +36,6 @@ class Solution:
         return result
     
 # 方法三：层序遍历，队列实现【BFS，参考第102题的解答，本题不需要记录每层节点值，只需要记录最大深度】
-from collections import deque
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if root is None:
