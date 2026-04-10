@@ -1,15 +1,17 @@
 # https://leetcode.cn/problems/trapping-rain-water/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 
 from typing import List
+
 class Solution:
     def trap(self, height: List[int]) -> int:
-        result = 0
+        result = 0 # 接水量，累加计算的
         left, right = 0, len(height) - 1
-        pre_max = suf_max = 0
+        pre_max = suf_max = 0  # 初始化左边最大值和右边最大值
 
         while left < right:
-            # 先更新最大值
-            pre_max = max(pre_max, height[left])
+            # 先更新最大值：因为要先找到左右两端分别与当前扫描到的left或right的更大值。然后，接水量由左右指针的更小值决定
+            pre_max = max(pre_max, height[left]) 
             suf_max = max(suf_max, height[right])
 
             # 再计算雨量。为什么可以安全的计算雨量？
