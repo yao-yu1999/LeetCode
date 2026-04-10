@@ -1,29 +1,27 @@
 # https://leetcode.cn/problems/spiral-matrix/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。
 
 from polars import List
 
-# 方法一：用方向数组DIRS模拟右下左上移动,遍历m*n次,将matrix[i][j]加入结果并标记已访问,遇到边界或已访问则转向,最终返回螺旋序列。
+# 方法一：用方向数组DIRS模拟右下左上移动,遍历m*n次,将matrix[i][j]加入结果并标记已访问,遇到边界或已访问则转向,最终返回螺旋序列。【推荐】
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         DIRS = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-        di = 0
+        di = 0  # 方向数组的索引:0,1,2,3
 
         m, n = len(matrix), len(matrix[0])
         result = []
-        i=j=0
-
-        for _ in range(m*n): # 共计要走的步数
-            # 先把当前字符添加进去并标记已经访问过
-            result.append(matrix[i][j])
+        
+        i=j=0 # 正在访问的格子
+        for _ in range(m*n): # 共计要走的步数   
+            result.append(matrix[i][j]) # 先把当前字符添加进去并标记已经访问过
             matrix[i][j] = None
 
-            # 确定下一步的位置
+            # 预测下一步的位置并判断是否越界：如果下一步的位置 (x, y) 出界了或者已经访问过，就更新方向
             x = i + DIRS[di][0]
             y = j + DIRS[di][1]
-
-            # 判断是否越界：如果下一步的位置 (x, y) 出界了或者已经访问过，就更新方向
             if x<0 or x>=m or y<0 or y>=n or matrix[x][y] is None:
-                di = (di+1)%4  # 取模
+                di = (di+1)%4  # 取模。不是 di += 1，因为如果di=4，就超过方向数组索引了。
 
             # 更新i,j：按照新的方向走下一步
             i = i + DIRS[di][0]

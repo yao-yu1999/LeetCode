@@ -1,4 +1,6 @@
 # https://leetcode.cn/problems/set-matrix-zeroes/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用 原地 算法。
+# 方法：用矩阵的第一行和第一列当标记位
 
 from typing import List
 
@@ -10,13 +12,13 @@ class Solution:
         first_row_has_zero = 0 in matrix[0] 
         first_col_has_zero = any(row[0] == 0 for row in matrix)
 
-        # 第一次遍历：用第一行、第一列做标记
+        # 第一次遍历：用第一行、第一列做标记。跳过第一行第一列
         for i in range(1, m):
             for j in range(1, n):
                 if matrix[i][j] == 0:
-                    matrix[i][0] = matrix[0][j] = 0   # 标记第j列有0
+                    matrix[i][0] = matrix[0][j] = 0   # 标记对应的行和列的标记位有0
 
-        # 第二次遍历：根据第一行第一列的标记置0
+        # 第二次遍历：根据第一行第一列的标记置0。跳过第一行第一列
         for i in range(1, m):
             for j in range(1, n):
                 if matrix[i][0] == 0 or matrix[0][j] == 0:
@@ -25,10 +27,10 @@ class Solution:
         # 最后处理第一列、第一行
         if first_row_has_zero:
             for j in range(n):
-                matrix[0][j] = 0 # 假如第一行有0，（遍历每一列）把第一行全置0
+                matrix[0][j] = 0 # 假如第一行有0，（遍历每一列）把第一行（每列第一个元素）全置0
 
         if first_col_has_zero:
             for i in range(m):
-                matrix[i][0] = 0  # 假如第一列有0，（遍历每一行）把第一列全置0
+                matrix[i][0] = 0  # 假如第一列有0，（遍历每一行）把第一列（每行第一个元素）全置0
         
         
