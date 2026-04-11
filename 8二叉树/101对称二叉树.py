@@ -1,4 +1,6 @@
 # https://leetcode.cn/problems/symmetric-tree/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给你一个二叉树的根节点 root ， 检查它是否轴对称。
+
 from typing import Optional
 from polars import TreeNode
 
@@ -11,8 +13,10 @@ from polars import TreeNode
 class Solution:
     # 参考第100题，将递归判断相同的树，改成递归判断是否为镜像（轴对称）树
     def isMirrorTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if p is None and q is None:
+            return True
         if p is None or q is None:
-            return p is q
+            return False
 
         return p.val == q.val and self.isMirrorTree(p.left, q.right) and self.isMirrorTree(p.right, q.left)
 

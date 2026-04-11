@@ -1,12 +1,13 @@
 # https://leetcode.cn/problems/number-of-islands/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。
+# 此外，你可以假设该网格的四条边均被水包围。
 
 from polars import List
 
-# 方法1：DFS 【推荐】
-# 本题：当前层可能不安全，必须立刻检查。进入 dfs (i,j) → 可能越界、可能是水、可能无效
-# 79单词搜索：当前层一定安全，只检查下一步。进入 dfs (i,j,k) → 一定安全、不越界、是有效格子所以不需要在当前层判断越界。
-
-# （1）当前层判断版本
+# 方法1：DFS 
+# （1）当前层判断版本【推荐】
+# 本题：当前层可能不安全，必须立刻检查。进入 dfs (i,j) → 可能越界、可能是水、可能无效。
+# 79题单词搜索：当前层一定安全，只检查下一步。进入 dfs (i,j,k) → 一定安全、不越界、是有效格子所以不需要在当前层判断越界。
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         m, n = len(grid), len(grid[0])
@@ -25,12 +26,12 @@ class Solution:
             dfs(i + 1, j)  # 往下走
         
         # 主函数体
-        result = 0
+        result = 0 # 岛屿数量
         for i in range(m):
             for j in range(n):
-                if grid[i][j] == '1': # 发现新岛屿，没有新岛屿的时候会直接返回结果
-                    dfs(i, j)         # 标记：淹掉整座岛
-                    result += 1      # 岛屿数 +1
+                if grid[i][j] == '1': # 发现新岛屿，没有新岛屿的时候遍历下一个位置
+                    dfs(i, j)         # 标记：递归淹掉整座岛
+                    result += 1       # 岛屿数 +1
         
         return result
     
