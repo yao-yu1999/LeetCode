@@ -1,9 +1,10 @@
 # https://leetcode.cn/problems/invert-binary-tree/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。
 
 from typing import Optional
 from polars import TreeNode
 
-# 方法一：递归法，DFS
+# 方法一：递归法，DFS【推荐】
 # 根据二叉树镜像的定义，考虑递归遍历（dfs）二叉树，交换每个节点的左 / 右子节点，即可生成二叉树的镜像。
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
@@ -12,6 +13,7 @@ class Solution:
         left = self.invertTree(root.left)  # 递归中，每一层都把自己看作 “小根root”
         right = self.invertTree(root.right)
 
+        # 交换左右子树
         root.left = right
         root.right = left
 
@@ -21,7 +23,7 @@ class Solution:
 # 方法2：迭代法，辅助栈（或队列）
 # 利用栈（或队列）遍历树的所有节点 node ，并交换每个 node 的左 / 右子节点。区别仅在于，初始化栈和队列、取出节点的方式不同。
 
-# （1）辅助栈
+# （1）辅助栈，DFS
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if root is None: return None # 空树判断：没有节点，直接返回
@@ -34,10 +36,10 @@ class Solution:
             if node.right: # 右孩子不为空 → 入栈
                 stack.append(node.right)
                 
-            node.left, node.right = node.right, node.left  # 交换当前节点的 左、右孩子
+            node.left, node.right = node.right, node.left  # 交换当前节点的 左、右子树！
         return root
     
-# （2）辅助队列
+# （2）辅助队列，BFS
 from collections import deque  # 队列必须用 deque
 
 class Solution:
@@ -53,6 +55,6 @@ class Solution:
             if node.right: 
                 queue.append(node.right)
                 
-            node.left, node.right = node.right, node.left  # 交换不变
+            node.left, node.right = node.right, node.left  # 交换当前节点的 左、右子树！
             
         return root

@@ -1,21 +1,21 @@
 # https://leetcode.cn/problems/top-k-frequent-elements/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。
 from collections import Counter, defaultdict
 from polars import List
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # 1. 统计每个元素的出现次数
-        cnt = Counter(nums) # Counter 是 Python 自带计数器，如{1:3, 2:2, 3:1}
+        cnt = Counter(nums) # 统计每个元素的出现次数。Counter 是 Python 自带计数器，如{1:3, 2:2, 3:1}
         
-        # 2. 创建 max_cnt+1 个空列表当桶, 并在对应桶中放数字。桶下标 = 出现次数
-        max_cnt = max(cnt.values()) # 找到最大出现次数，用来决定要建多少个桶
+        # 2. 创建 max_cnt 个空列表当桶, 并在对应桶中放数字。桶下标 = 出现次数
+        max_cnt = max(cnt.values()) # 找到最大的出现次数，用来决定要建多少个桶
         buckets = [[] for _ in range(max_cnt + 1)]
         
         # 3. 遍历哈希表。把出现次数相同的元素，放到同一个桶中
-        for num, count in cnt.items(): # 注意：遍历的是字典而不是nums数组
+        for num, count in cnt.items(): # 注意：遍历的是字典键值对，而不是nums数组
             buckets[count].append(num)
 
-        result = []
+        result = [] # 记录前 K 个高频元素
         # 4. 倒序遍历 buckets，把出现次数前 k 大的元素加入答案
         # （1）因为本题题目保证，加入某个桶全部数字后就能满足K，所以可以用这个
         # for bucket in reversed(buckets):
@@ -24,13 +24,14 @@ class Solution:
         #         return result
 
         # （2）但是建议这个更通用的版本，一个一个加进结果中
-        for bucket in reversed(buckets): # defaultdict 是字典，不能 reversed
+        for bucket in reversed(buckets): 
             for num in bucket: # 遍历桶里每一个数字，一个一个加
                 result.append(num)
                 if len(result) == k: # 必须写在循环里面
                     return result
-            
-# defaultdict()版本
+
+# 注1：for num, count in cnt.items():  是拿到键值对；for num in cnt:   默认拿到的是键
+# 注2：defaultdict()版本
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         cnt = Counter(nums)
@@ -44,7 +45,7 @@ class Solution:
         sorted_counts = sorted(buckets.keys(), reverse=True)
         
         # 遍历排序后的频率
-        for count in sorted_counts:
+        for count in sorted_counts: # defaultdict 是字典，不能 reversed。要先排序
             for num in buckets[count]: # 取出对应频率的数字
                 result.append(num)
                 if len(result) == k:

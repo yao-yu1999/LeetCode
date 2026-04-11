@@ -1,27 +1,33 @@
 # https://leetcode.cn/problems/subsets/?envType=study-plan-v2&envId=top-100-liked
-# 选或不选，枚举选哪个？两个分支都要走
-# 动态列表
+# 题目：一个整数数组 nums ，数组中的元素互不相同 。返回该数组所有可能的子集（幂集）。解集不能包含重复的子集。可以按 任意顺序 返回解集。
+# 选或不选，枚举选哪个？两个分支都要走。是动态列表
 
 from polars import List
 
-# 方法1：一进来就保存，然后从剩下的数字中选择一个加入path（更适合子集/序列/组合问题
+# 方法1：一进来就保存，然后从剩下的数字中选择一个加入path（更适合子集/序列/组合问题）【推荐】
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
-        result = []
+        result = [] # 记录最终结果
         path = [] # 当前子序列
 
-        # dfs(i)：从 i ~ n-1 中选一个数字加入 path
+        # dfs(i)：枚举，从 i ~ n-1 中选一个数字加入 path
         def dfs(i: int):
             result.append(path.copy()) # 一进来就保存当前子集（包括空集）
 
             # 从剩下的数字中，枚举选哪个数字 j
             for j in range(i, n):  # 从i开始到结尾
                 path.append(nums[j]) # 选择当前下标为j的数字加入当前子序列
-                dfs(j + 1)   # 下一次只能选 j 后面的 (注意不是i哦)
-                path.pop()   # 恢复现场，供其他分支使用：列表也有类似栈的弹出操作，即最后一个（也就是刚刚添加的元素）
-        dfs(0)
+
+                dfs(j + 1)   # 递归：下一次只能选 j 后面的 (注意不是i，也不是j哦。因为不能选已经选过的数字)
+
+                path.pop()   # 恢复现场，供其他分支使用。
+
+        dfs(0) # 从下标0开始
         return result
+
+# path.pop()：列表也有类似栈的弹出操作，即最后一个（也就是刚刚添加的元素）
+
 
 # 方法2：选或不选。全部走完，才复制path到result（更适合排列）
 class Solution:

@@ -1,5 +1,5 @@
 # https://leetcode.cn/problems/combinations/description/
-# 【模板题】返回范围 [1, n] 中所有可能的 k 个数的组合。
+# 【模板题】题目：返回范围 [1, n] 中所有可能的 k 个数的组合。
 from polars import List
 
 # 方法1：枚举选哪个？
@@ -16,9 +16,11 @@ class Solution:
                 return None
 
             # j是循环变量，正着枚举后面的数。j 最大只能到 n - d + 1，否则后面不够选，避免无效递归
-            for j in range(i, n - d + 2): # j 超过 n-d+1 就会凑不齐，直接剪枝（你还需要选 d 个数，必须给后面留够 d-1 个数）
+            for j in range(i, n - d + 2): # j 超过 n-d+1 就会凑不齐，直接剪枝（你还需要选 d 个数，除了当前j，你必须给后面留够 d-1 个数）
                 path.append(j)
-                dfs(j + 1) # 逆序递归
+
+                dfs(j + 1) # 递归
+
                 path.pop()  # 恢复现场
 
         dfs(1)  # 从1开始:这道题的数字是 1～n, 不是下标0～n-1

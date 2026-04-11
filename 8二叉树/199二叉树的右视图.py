@@ -1,8 +1,10 @@
 # https://leetcode.cn/problems/binary-tree-right-side-view/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给定一个二叉树的 根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
 
 from collections import deque
 from typing import List, Optional
 from polars import TreeNode
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -10,17 +12,16 @@ from polars import TreeNode
 #         self.left = left
 #         self.right = right
 
-# 方法1：BFS 层序遍历
+# 方法1：BFS 层序遍历【推荐】
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if root is None: return []
         
-        result = [] # 最终的结果
+        result = [] # 记录最终的结果
         queue = deque([root])  # 队列初始化，放入根节点
-        
         while queue:
-            q_len = len(queue)  # 易错点！！这里必须用一个变量保存当前层长度，否则在取出节点后，队列里的节点会减少，当判断当前层最后一个节点的时候会混乱
-            for i in range(q_len):  # 易错点！！遍历当前层的所有节点，注意哦：这里不能写_，因为需要用到下标
+            q_len = len(queue)  # 易错点！！这里必须用一个变量保存当前层长度，否则在取出节点后，队列里的节点会减少，后面判断当前层最后一个节点的时候会混乱
+            for i in range(q_len):  # 易错点！！遍历当前层的所有节点。注意哦：这里不能写_，因为需要用到下标
                 node = queue.popleft()  # 从队头取出节点
                 
                 # 如果是当前层最后一个节点 → 就是右视图

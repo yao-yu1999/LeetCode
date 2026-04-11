@@ -1,36 +1,39 @@
 # https://leetcode.cn/problems/permutations/description/?envType=study-plan-v2&envId=top-100-liked
-# 排列不是子序列，每个数都要选，没有「不选」。
-# 固定长度列表
+# 题目：给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
+# 注意：排列不是子序列，每个数都要选，没有「不选」。是固定长度列表
 
 from polars import List
 
 # 方法一：标准回溯
-# 写法1：使用布尔数组 【推荐 √】
+# 写法1：使用布尔数组 【推荐】
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
         path = [0] * n  # 存放当前排列：所有排列的长度都是一样的 n
         isUsed = [False] * n # 标记：在当前排列的情况下，该数字是否使用过？
-        result = []
+        result = [] # 记录答案
 
-        # 当前排列的第i个位置填什么？给第 i 位填数字
+        # 枚举当前排列的第i个位置填什么？给第 i 位填数字
         def dfs(i: int) -> None:
-            if i == n:  # 终止条件：所有位置都填完了
-                result.append(path.copy())  # 保存当前排列（必须copy）。也可以写 path[:]
+            if i == n:  # 剪枝：所有位置都填完了
+                result.append(path.copy())  # 保存当前排列（必须是copy）。也可以写 path[:]
                 return None  # 一旦递归到达终止条件，必须立即返回，不再执行同一函数的剩余代码
             
             # 走到这一步说明没有排满，要去看数组中j对应的数字是否使用过
-            for j in range(n):  #  j是用来遍历所有数字
-                if not isUsed[j]: # 如果 nums[j] 没被用过
+            for j in range(n):  #  j是用来遍历所有数字，并找到 nums[j] 没被用过的
+                if not isUsed[j]:
                     path[i] = nums[j]  # 选它，放到第 i 位
                     isUsed[j] = True  # 标记：已使用
-                    dfs(i + 1) # # 填下一位
-                    isUsed[j] = False  # isUsed要回溯：撤销标记（恢复现场）,让这个数字可以在其他分支中被使用
+                    
+                    dfs(i + 1) # 递归：填下一位
+                    
                     # 因为排列长度固定，直接覆盖就行，所以 path 无需恢复现场
-
+                    isUsed[j] = False  # 但是isUsed要回溯：撤销标记（恢复现场）,让这个数字可以在其他分支中被使用
+            
         dfs(0) # 传入第一位
         return result
     
+
 # 写法2：集合操作,不用手动恢复现场，因为每次传新集合
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
