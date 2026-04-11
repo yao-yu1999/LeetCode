@@ -1,11 +1,13 @@
 # https://leetcode.cn/problems/kth-largest-element-in-an-array/submissions/715293225/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
+# 你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。必须设计并实现时间复杂度为 O(n) 的算法解决此问题。
+
 from random import randint, random
 from polars import List
 
-# 方法一：快速选择算法（Quick Select）- 三路快排
+# 方法一：快速选择算法（Quick Select）- 三路快排 【推荐】
 # 每次随机选一个数 pivot, 把数组分成 3 堆：(1) 比 pivot 大的 → big；(2) 比 pivot 小的 → small；(3) 和 pivot 一样的 → equal
 # 然后只去目标所在那堆继续找：(1)第k大在big里 → 去big找; (2)第k大在equal里 → 直接返回pivot; (3)第k大在small里 → 去small找
-
 class Solution:
     def findKthLargest(self, nums, k):
         def quick_select(nums, k):
@@ -38,9 +40,7 @@ class Solution:
             else: # 第 k 大元素在 equal 
                 return pivot   # equal 堆里所有数都等于 pivot所以直接返回 pivot 就是答案
             
-        result = quick_select(nums, k)
-        
-        return result 
+        return quick_select(nums, k)
     
 # 方法二：快速选择算法（Quick Select）- 双路快排
 # 

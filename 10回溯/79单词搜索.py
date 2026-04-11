@@ -1,15 +1,18 @@
 # https://leetcode.cn/problems/word-search/submissions/715853699/?envType=study-plan-v2&envId=top-100-liked
+# 题目：给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。
+# 单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
 
 from collections import Counter
 from polars import List
 
-# （1）递归层判断
+# （1）递归层判断【推荐】
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         cnt = Counter(c for row in board for c in row) # 统计二维网格中所有字母c出现次数：外层 for row in board，内层 for c in row 
+        word_cnt = Counter(word) # 单词里的字母数量
         
-        # 优化1：如果 "网格里的格子数量 >= 单词里的字母数量" 不成立 → 直接False
-        if not cnt >= Counter(word): # 两个计数器，逐键(即字母)比较计数(对应的数量的大小)
+        # 优化1：如果 "网格里的字母数量 >= 单词里的字母数量" 不成立 → 直接False
+        if not cnt >= word_cnt: # 逐个字符比较，出现的次数。比较的是每个键（字母）对应的【值（出现次数）】大小
             return False
         
         # 优化2：如果单词末尾字母更少 → 反转单词 → 减少搜索量（既可以正着搜也可以反着搜，选择递归次数更少的哪个即可）
@@ -35,15 +38,19 @@ class Solution:
             board[i][j] = word[k] # 回溯：恢复当前格子
             return False # 在这个格子的四个方向全都走完了也没找到正确路径 → 这条路径是失败的 → 告诉上一层：这里不行，换别的路 return False
 
-        # 遍历每个格子作为起点，只要有一个起点成功就返回True
-        # return any(dfs(i, j, 0) for i in range(m) for j in range(n)) 等价于：
-        # for i in range(m):
-        #     for j in range(n):
-        #         if dfs(i, j, 0) is True:
-        #             return True
-        # return False
-        return any(dfs(i, j, 0) for i in range(m) for j in range(n)) # 里面只要有一个是 True，整体就返回 True；全部都是 False，才返回 False
-    
+        # 遍历每个格子作为起点，只要有一个起点成功就返回True，全部都是 False，才返回 False
+        return any(dfs(i, j, 0) for i in range(m) for j in range(n))
+
+
+# 注1：比较键的个数。len(cnt) >= len(word_cnt)
+# 注2：return any(dfs(i, j, 0) for i in range(m) for j in range(n)) 等价于：
+# for i in range(m):
+#     for j in range(n):
+#         if dfs(i, j, 0) is True:
+#             return True
+# return False
+
+
 # （2）当前层判断
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:

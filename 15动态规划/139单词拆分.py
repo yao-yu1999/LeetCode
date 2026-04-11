@@ -1,5 +1,6 @@
 # https://leetcode.cn/problems/word-break/description/?envType=study-plan-v2&envId=top-100-liked
-
+# 题目：给你一个字符串 s 和一个字符串列表 wordDict 作为字典。如果可以利用字典中出现的一个或多个单词拼接出 s 则返回 true。
+# 注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。
 
 from polars import List
 
@@ -12,10 +13,10 @@ class Solution:
         
         f = [True] + [False]*n # 创建dp数组，初始化条件f[0]=True, 因为空字符串一定可以拼成;其他默认为False
 
-        # 遍历:i是背包容量，判断前i个字符能不能拼成
+        # 求排列数。先遍历容量:i是背包容量，判断前i个字符能不能拼成
         for i in range(1, n + 1):
             # 判断前i个字符是否由字典里的单词拼成了
-            for j in range(i - 1, max(i - max_len - 1, -1), -1):
+            for j in range(i - 1, max(i - max_len - 1, -1), -1): # 后遍历物品
                 if f[j] and s[j:i] in words: # 即f[j] == True，前j个字符能拼成；s[j:i] in words, j到i这一段是字典里的单词
                     f[i] = True # 满足条件，当前设置为True
                     break

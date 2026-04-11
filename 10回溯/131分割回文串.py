@@ -1,28 +1,31 @@
 # https://leetcode.cn/problems/palindrome-partitioning/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目： 给你一个字符串 s，请你将 s 分割成一些 子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。
 
 from polars import List
 
-# 方法1：枚举j选哪个
+# 方法1：枚举j选哪个【推荐】
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         n = len(s)
-        result = []
-        path = []
+        result = [] # 记录全部回文串
+        path = [] # 记录当前回文串
 
-        # 考虑 s[i:] 怎么分割？从当前位置i开始
+        # 考虑 s[i:] 怎么分割？从当前位置i开始，枚举结束的位置
         def dfs(i: int) -> None:
             if i == n:  # s 分割完毕
                 result.append(path.copy())  # 复制 path 加入到 result
-                return None 
+                return None # 推出递归
 
-            for j in range(i, n):  # 枚举子串的结束位置
+            for j in range(i, n):  # 枚举子串的结束位置，逐个比较
                 t = s[i: j + 1]  # 分割出子串 t
-                if t == t[::-1]:  # 判断 t 是不是回文串，如果是就加入;如果不是不用做任何操作，不用提前return None（否则就是忽略了其他的回文字符串，直接停止递归了）
+                if t == t[::-1]:  # 判断 t 是不是回文串，如果是就加入;如果不是不用做任何操作，不用提前return None。继续遍历下一个（否则就是忽略了其他的回文字符串，直接停止递归了）
                     path.append(t)
+
                     dfs(j + 1) # 考虑剩余的 s[j+1:] 怎么分割
+
                     path.pop()  # 回溯：恢复现场
 
-        dfs(0)
+        dfs(0) # 传入分割位置：初始为0
         return result
 
 

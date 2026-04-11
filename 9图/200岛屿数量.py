@@ -70,7 +70,7 @@ class Solution:
     
 # 方法2：BFS
 class Solution:
-    def numIslands(self, grid: [[str]]) -> int:
+    def numIslands(self, grid: List[List[str]]) -> int:
         def bfs(i, j) -> None:
             queue = [[i, j]]
             while queue:

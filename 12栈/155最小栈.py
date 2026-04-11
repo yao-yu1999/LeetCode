@@ -1,13 +1,20 @@
 # https://leetcode.cn/problems/min-stack/description/?envType=study-plan-v2&envId=top-100-liked
+# 题目：设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。实现 MinStack 类:
+# MinStack() 初始化堆栈对象。
+# void push(int val) 将元素val推入堆栈。
+# void pop() 删除堆栈顶部的元素。
+# int top() 获取堆栈顶部的元素。
+# int getMin() 获取堆栈中的最小元素。
+
 from numpy import inf
 
 class MinStack:
     def __init__(self):
-        self.stack = [(0, inf)]  # 栈底哨兵：（1）值的位置，可以写成任意数，反正用不到；（2）第二个数写成无穷大，保证第一次 min 一定是新数
+        self.stack = [(0, inf)]  # 栈底哨兵：（1）值的位置，可以写成任意数，反正用不到；（2）第二个数：表示到当前记录的最小值。初始写成无穷大，保证第一次 min 一定是新数
 
     # 入栈
     def push(self, val: int) -> None:
-        min_val = min(self.stack[-1][1], val) # 新最小值 = min(栈顶最小值, 新值)
+        min_val = min(self.stack[-1][1], val) # 更新最小值 = min(栈顶最小值, 新值)
         self.stack.append((val, min_val))  # 将要入栈的元素和最小值元素，按照成对的形式入栈
 
     # 出栈
