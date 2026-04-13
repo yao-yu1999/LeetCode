@@ -27,7 +27,7 @@ class Solution:
         while queue:
             pre = queue.popleft() # 弹出队首节点（表示学习了的课程）
             numCourses -= 1   # 学完一门就-1
-            for cur in adj[pre]: # 同时更新邻接表中的数据
+            for cur in adj[pre]: # 遍历邻接表中的数据
                 in_degree[cur] -= 1 # 当前课程的先修课-1
                 if in_degree[cur] == 0: # 如果这门课的所有先修课全部学完了
                     queue.append(cur) # 表示当前课程可以解锁了
