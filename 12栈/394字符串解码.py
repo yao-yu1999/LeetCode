@@ -15,7 +15,7 @@ class Solution:
             if c == '[':       # 1. 遇到 [ → 保存现场（入栈）
                 stack.append((k, result)) # 入栈
                 result = ""        # 重置，准备记录括号内内容
-                k = 0           # 重置，倍数清零
+                k = 0           # 重置，倍数清零。
                 
             elif c == ']':     # 2. 遇到 ] → 恢复现场，拼接结果
                 cur_k, last_res = stack.pop() # 弹出，准备拼接

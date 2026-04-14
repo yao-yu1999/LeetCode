@@ -2,7 +2,7 @@
 # 算法的时间复杂度应该为 O(log (m+n)) 。
 # 若总长度为奇数，中位数就是左边部分的最大值。若总长度为偶数，中位数 = (左边最大值 + 右边最小值) / 2
 
-
+from typing import List
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         # 保证 nums1 是较短的
@@ -18,7 +18,7 @@ class Solution:
             i = (left + right) // 2
             j = total_left - i  # 因为 total_left = i + j，j可以推出
             
-            # 处理边界：用 -inf 和 inf 表示空侧的极值
+            # 处理边界(虚拟哨兵)：用 -inf 和 inf 表示空侧的极值
             a_left = nums1[i-1] if i > 0 else float('-inf')
             a_right = nums1[i] if i < m else float('inf')
             b_left = nums2[j-1] if j > 0 else float('-inf')
