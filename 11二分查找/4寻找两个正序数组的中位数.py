@@ -1,8 +1,10 @@
+# https://leetcode.cn/problems/valid-parentheses/description/?envType=study-plan-v2&envId=top-100-liked
 # 题目：给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。
 # 算法的时间复杂度应该为 O(log (m+n)) 。
 # 若总长度为奇数，中位数就是左边部分的最大值。若总长度为偶数，中位数 = (左边最大值 + 右边最小值) / 2
 
 from typing import List
+
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         # 保证 nums1 是较短的

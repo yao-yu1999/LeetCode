@@ -8,7 +8,8 @@ from polars import TreeNode
 # 根据二叉树镜像的定义，考虑递归遍历（dfs）二叉树，交换每个节点的左 / 右子节点，即可生成二叉树的镜像。
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root is None: return None # 大根节点为null，直接返回null。
+        if root is None: 
+            return None # 大根节点为null，直接返回null。
 
         left = self.invertTree(root.left)  # 递归中，每一层都把自己看作 “小根root”
         right = self.invertTree(root.right)

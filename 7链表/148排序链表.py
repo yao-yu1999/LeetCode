@@ -2,14 +2,14 @@
 # 题目：给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
 # 结合876和21题
 
-from typing import Optional
+from typing import Optional, ListNode
 
 # 归并排序（分治）
 #  Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
 class Solution:
     # 1. 找中点 + 切链（876题核心）
