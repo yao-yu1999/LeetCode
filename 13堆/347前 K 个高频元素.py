@@ -1,5 +1,6 @@
 # https://leetcode.cn/problems/top-k-frequent-elements/description/?envType=study-plan-v2&envId=top-100-liked
 # 题目：给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。
+
 from collections import Counter, defaultdict
 from polars import List
 
@@ -16,15 +17,7 @@ class Solution:
             buckets[count].append(num)
 
         result = [] # 记录前 K 个高频元素
-        # 4. 倒序遍历 buckets，把出现次数前 k 大的元素加入答案
-        # （1）因为本题题目保证，加入某个桶全部数字后就能满足K，所以可以用这个
-        # for bucket in reversed(buckets):
-        #     result += bucket  # 把桶里的数字全部加入答案
-        #     if len(result) == k: # 满 k 个立刻返回:频率一样的数字, 全部返回
-        #         return result
-
-        # （2）但是建议这个更通用的版本，一个一个加进结果中
-        for bucket in reversed(buckets): 
+        for bucket in reversed(buckets):  # 倒叙遍历桶,从频率最高的开始加入
             for num in bucket: # 遍历桶里每一个数字，一个一个加
                 result.append(num)
                 if len(result) == k: # 必须写在循环里面

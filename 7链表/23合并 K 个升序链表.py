@@ -4,10 +4,12 @@
 from typing import List,Optional,ListNode
 from heapq import heapify,heappop,heappush
 
+ListNode.__lt__ = lambda a,b : a.val < b.val # 必须写!
+
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         cur = dummy = ListNode()  # 初始化哨兵节点，作为合并后新链表头节点的前一个节点
-        h = [head for head in lists if head]  # 把所有非空链表的头节点入堆
+        h = [head for head in lists if head]  
         heapify(h)  # 列表转换成小顶堆
         
         while h:  # 循环直到堆为空

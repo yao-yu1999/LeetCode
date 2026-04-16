@@ -14,9 +14,7 @@ class Solution:
         # dfs(i)：枚举，从 i ~ n-1 中选一个数字加入 path
         def dfs(i: int):
             result.append(path.copy()) # 一进来就保存当前子集（包括空集）
-
-            # 从剩下的数字中，枚举选哪个数字 j
-            for j in range(i, n):  # 从i开始到结尾
+            for j in range(i, n):  # 从剩下的数字中，枚举选哪个数字j. 从i开始到结尾
                 path.append(nums[j]) # 选择当前下标为j的数字加入当前子序列
 
                 dfs(j + 1)   # 递归：下一次只能选 j 后面的 (注意不是i，也不是j哦。因为不能选已经选过的数字)

@@ -22,15 +22,6 @@ class Solution:
                     small.append(num)
                 else:
                     equal.append(num)
-            
-            # 或者可以遍历下标
-            # for i in range(len(nums)): 
-            #     if nums[i] > pivot:
-            #         big.append(nums[i])
-            #     elif nums[i] < pivot:
-            #         small.append(nums[i])
-            #     else:
-            #         equal.append(nums[i])
 
             # 2. 去对应的堆继续找
             if k <= len(big): # 第 k 大元素在 big 中

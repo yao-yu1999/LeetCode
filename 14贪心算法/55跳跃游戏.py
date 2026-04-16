@@ -17,8 +17,6 @@ class Solution:
                 return False
             
             max_x = max(max_x, i + nums[i])  # 更新能跳的最远位置
-
-            # 提前结束：还没遍历完整个数组，只要发现 “已经能跳到终点”，立刻返回 True！
-            if max_x >= n - 1:
+            if max_x >= n - 1: # 提前结束：还没遍历完整个数组，只要发现 “已经能跳到终点”，立刻返回 True！
                 return True
         return True # 能走完所有位置，说明能到终点

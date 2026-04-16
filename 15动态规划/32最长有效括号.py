@@ -27,13 +27,13 @@ class Solution:
         if n == 0:
             return 0
         dp = [0] * (n + 1)
-        stk = [] # 存左括号位置
+        stack = [] # 存左括号位置
         for i, c in enumerate(s):
             if c == '(':
-                stk.append(i)
-            elif len(stk) > 0:
-                top = stk[-1] # 当前左括号
-                stk.pop()
+                stack.append(i)
+            elif len(stack) > 0:
+                top = stack[-1] # 当前左括号
+                stack.pop()
                 # 如果左括号前还有串，则继续往前找有没有有效括号
                 dp[i] = i - top + 1 + (dp[top - 1] if top >= 1 else 0)
         return max(dp)

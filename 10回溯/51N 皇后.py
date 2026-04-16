@@ -26,7 +26,9 @@ class Solution:
                 if not ok and not diag1[row + col] and not diag2[row - col]:  # 判断能否放皇后:对应列和斜线下标非false
                     queens[row] = col  # 直接在对应位置覆盖，无需恢复现场
                     col_bool[col] = diag1[row + col] = diag2[row - col] = True  # 皇后占用了 col 列和两条斜线
+                    
                     dfs(row + 1)
+                    
                     col_bool[col] = diag1[row + col] = diag2[row - col] = False  # 但是布尔数组需要恢复现场
         dfs(0)
         return result

@@ -19,7 +19,7 @@ class Solution:
             return 0
         left = self.maxDepth(root.left)
         right = self.maxDepth(root.right)
-        return max(left, right) + 1 # 1是根节点的深度
+        return max(left, right) + 1 # 1是根节点的深度.每向上返回一层，深度就 +1
      
 # 方法二：后序遍历（DFS，自顶向下），递归实现 【不建议】
 class Solution:
