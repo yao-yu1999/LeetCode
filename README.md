@@ -48,7 +48,7 @@ https://my.feishu.cn/wiki/PdtGwSkxpi4EOzkvTZccjW22n8J?sheet=9EEToi
 
 （3）小程序：支持按公司、部门、岗位组合查询题目
 
-CodeTop 企业题单：https://codetop.cc/（网站，也有微信小程序）
+CodeTop 企业题单（网站，也有微信小程序）：https://codetop.cc/ 
 
 Github仓库地址： https://github.com/afatcoder/LeetcodeTop
 

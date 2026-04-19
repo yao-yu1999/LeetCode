@@ -20,6 +20,7 @@ class Solution:
             max_len = max(max_len, right - left + 1)  # 更新窗口长度最大值
         return max_len
     
+    
 # 方法2：哈希集合（布尔数组）
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:

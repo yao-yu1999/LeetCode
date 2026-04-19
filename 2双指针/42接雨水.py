@@ -16,7 +16,7 @@ class Solution:
 
             # 再计算雨量。为什么可以安全的计算雨量？
             if pre_max < suf_max:
-                result += pre_max - height[left] # 直接用最大值减去自身高度，并累加即可
+                result += pre_max - height[left] # 计算当前柱子上方的雨量：直接用最大值减去自身高度，并累加即可
                 left += 1 # 移动小的一边的指针：右移左指针
             else:
                 result += suf_max - height[right]

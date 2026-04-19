@@ -11,7 +11,7 @@ class Solution:
         for i in range(len(nums)):
             if nums[i]!=0: # 当前元素!=0，就把其交换到左边，等于0的交换到右边
                 nums[i], nums[j] = nums[j], nums[i] # python同时赋值，不需要临时变量。先把 nums[j] 的值保存到临时变量，再把 nums[i] 的值赋给 nums[j]，最后把临时变量的值赋给 nums[i]。这样就完成了交换。
-                j += 1
+                j += 1 # j指向的是第一个非零的元素。i和j不一定是左右关系
 
 # 错误示例：
 # nums[i] = nums[j]   # 第一步

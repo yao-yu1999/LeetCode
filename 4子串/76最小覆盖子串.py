@@ -6,35 +6,30 @@ from collections import defaultdict
 # 写法1：diff 数组 + geCnt（计数差值法）【推荐】
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        # 1.初始化差值数组和答案区间指针
         diff = defaultdict(int)  # 差值字典 = 窗口每种字母个数 - 字符串t每种字母个数。
-        for c in t: # 遍历t中的所有字符：每个字符都初始化 diff 为 t 的“负计数”，每出现一个字符，就表示窗口中还需要补齐多少的字符。
+        for c in t: # 统计t中的所有字符，记录在差值字典中：每个字符都初始化 diff 为 t 的“负计数”，表示当前字符窗口中还需要补齐多少个
             diff[c] -= 1
         k = len(diff)  # 常量：t 中有多少种不同的字母。当窗口内字符的种类数k ≥ 字符串t 中字符的种类数时，说明窗口一定涵盖了 t
-        
-        result_left, result_right = -1, len(s) # 记录最短答案区间：初始值设为-1和len(s)，这样第一次比较时任何合法窗口都会更短。
-        win_cnt = 0  # 表示窗口有多少种字符已经达标：窗口内有 win_cnt 种字母的出现次数 >= t 中相应字母的出现次数g。即该字符的 diff[ch] >= 0，差值为正，说明已经满足了
-        
-        # 2. 开始扩大和收缩窗口
-        left = 0 # 滑动窗口的左边界指针，初始指向 s[0]
-        for right,c in enumerate(s):  # 遍历字符串s
-            # （1） 右端点字母移入窗口
-            diff[c] += 1  # 对应字符数差值+1
-            if diff[c] == 0:  # 原来窗口内 c 的出现次数比字符串t 的少，现在一样多
+        win_cnt = 0  # 表示窗口有多少种字符已经达标：窗口内有 win_cnt 种字母的出现次数 >= t 中相应字母的出现次数。即该字符的 diff[ch] >= 0，差值为正，说明已经满足了
+
+        # 开始扩大和收缩窗口
+        result_left, result_right = -1, len(s) # 记录最短答案区间：初始值设为-1和len(s)，这样第一次比较时任何合法窗口都是更短的。
+        left = 0 # 滑动窗口的左指针
+        for right,x in enumerate(s):
+            # 扩大（尽量涵盖）：右端点字母移入窗口
+            diff[x] += 1  # 对应字符数差值+1
+            if diff[x] == 0:  # 如果窗口内 c 的出现次数和字符串t 差值为0
                 win_cnt += 1  # 从 表示该字符已经达标
             
-            # 在涵盖t的基础上：用while持续收缩
+            # 缩小：在涵盖t的基础上，用while持续收缩，达到最小覆盖
             while win_cnt == k:  
-                # （2-1）先更新答案区间的左右端点，防止后面移除不符合条件时，不会影响这里的记录
                 if right - left < result_right - result_left:  
                     result_left, result_right = left, right  
                 
-                # （2-2）再移出窗口左端点的字符：开始找更短的窗口
-                x = s[left]  # 字符串s的左端点字母
-                if diff[x] == 0: # 先判断移出字符 x 是否会破坏该字符的达标状态
+                if diff[s[left]] == 0: # 先判断移出字符 x 是否会破坏该字符的达标状态
                     win_cnt -= 1  # 如果差值是0，说明会将达标数减少（这里用于退出循环）
-                # 否则，说明这个左端点的字符时多余的，可以移出窗口
-                diff[x] -= 1  # 字符串s左端点字母移出窗口
+                    
+                diff[s[left]] -= 1  # 否则，说明这个左端点的字符是多余的，字符串s左端点字母移出窗口
                 left += 1 # 左指针继续向右收缩窗口
 
         return "" if result_left < 0 else s[result_left: result_right + 1] # 如果答案区间左端点<0，返回空串，否则返回答案区间
